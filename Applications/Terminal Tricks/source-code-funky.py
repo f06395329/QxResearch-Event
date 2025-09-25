@@ -1,6 +1,13 @@
 import pyfiglet
-word = pyfiglet.figlet_format("qxresearch",font="alphabet")
-print(word)
+
+
+def main():
+  word = pyfiglet.figlet_format("qxresearch", font="alphabet")
+  print(word)
+
+
+if __name__ == '__main__':
+  main()
 
 ```
 Output:
