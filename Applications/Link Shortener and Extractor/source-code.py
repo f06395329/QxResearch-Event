@@ -1,31 +1,46 @@
 import pyshorteners
 from urllib.request import urlopen
 
-def link_shortener(link):
-    shortener = pyshorteners.Shortener() #class object
-    short_link = shortener.tinyurl.short(link)  #shorting the link
-    
-    #Display
-    print('\t[+] Real Link: ' + link)
-    print('\t[+] Shortened Link: ' + short_link)
 
-def link_opener(link):
+def link_shortener(link: str) -> None:
+    shortener = pyshorteners.Shortener()
+    short_link = shortener.tinyurl.short(link)
+
+    print(f'\t[+] Real Link: {link}')
+    print(f'\t[+] Shortened Link: {short_link}')
+
+
+def link_opener(link: str) -> None:
     shortened_url = urlopen(link)
-    real_link = shortened_url.geturl()  # getting real link
+    real_link = shortened_url.geturl()
 
-    # Display
-    print('\t[+] Shortened Link: ' + link)
-    print('\t[+] Real Link: ' + real_link)
+    print(f'\t[+] Shortened Link: {link}')
+    print(f'\t[+] Real Link: {real_link}')
 
-if __name__ == '__main__' :
 
-    num = input("Enter your choice ...\n" 
-                "1. Type 1 for shortening link\n"
-                "2. Type 2 for extrcting real link from a shorten link\n")
+def main() -> None:
+    print("Enter your choice:")
+    print(" 1. Shorten a link")
+    print(" 2. Expand a shortened link to its real URL")
 
-    link = input("Enter the link: ")    
+    choice = input("Choice (1/2): ").strip()
+    if choice not in {'1', '2'}:
+        print("Invalid choice. Exiting.")
+        return
 
-    if (num == '1') :
-       link_shortener(link)
-    else :
-        link_opener(link)  
+    link = input("Enter the link: ").strip()
+    if not link:
+        print("Empty link provided. Exiting.")
+        return
+
+    try:
+        if choice == '1':
+            link_shortener(link)
+        else:
+            link_opener(link)
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+if __name__ == '__main__':
+    main()
