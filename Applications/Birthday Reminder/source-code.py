@@ -1,28 +1,50 @@
 import datetime
-current_date = datetime.date.today().strftime('%Y-%m-%d')
-current_date_lst = current_date.split('-')
-bday_log = [
-   ('Ayushi', ('1999', '10', '19')),
-   ('Yash', ('1999', '04', '21')),
-]
-add = input('To add birthday type y:').strip().lower()
-
-if add[:1] == 'y':
-   new = input('Add birthday in format yyyy-mm-dd:')
-   # print(new_lst)
-   name = input('Whose bday?')
-   date = new.split( '-' )
+from typing import List, Tuple
 
 
-   bday_log.append((name, tuple(date)))
+def _ordinal_suffix(n: int) -> str:
+   """Return ordinal suffix for a positive integer (1 -> 'st', 2 -> 'nd', 3 -> 'rd', otherwise 'th')."""
+   if 10 <= (n % 100) <= 20:
+      return "th"
+   return {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
 
-for birthday in bday_log:
-   # current_dat[1] == birthday[1][1] this will check if current month is same as birth month  and current date is same as
-   # birth date as per preadded log
+
+def main() -> None:
+   """Run a tiny birthday checker. Prompts to add a birthday and prints today's matches.
+
+   This function is safe to import (doesn't run until called) and uses simple ISO date parsing
+   for the add flow (yyyy-mm-dd).
+   """
+   today = datetime.date.today()
+   bday_log: List[Tuple[str, Tuple[str, str, str]]] = [
+      ("Ayushi", ("1999", "10", "19")),
+      ("Yash", ("1999", "04", "21")),
+   ]
+
+   try:
+      add = input("To add birthday type y:").strip().lower()
+   except (EOFError, KeyboardInterrupt):
+      # Non-interactive environment or user cancelled; just check preadded log
+      add = ""
+
+   if add.startswith("y"):
+      new = input("Add birthday in format yyyy-mm-dd:")
+      name = input("Whose bday?")
+      try:
+         d = datetime.date.fromisoformat(new)
+         date = (str(d.year), f"{d.month:02d}", f"{d.day:02d}")
+         bday_log.append((name, date))
+      except ValueError:
+         print("Invalid date format; expected yyyy-mm-dd. Skipping add.")
+
+   for birthday in bday_log:
+      byear, bmonth, bday = birthday[1]
+      if int(bmonth) == today.month and int(bday) == today.day:
+         age = today.year - int(byear)
+         suffix = _ordinal_suffix(age)
+         print(f"It's {birthday[0]}'s {age}{suffix} Birthday")
 
 
-   if current_date_lst[1] == birthday[1][1] and current_date_lst[2] == birthday[1][2]:
-       age = int(current_date_lst[0]) - int(birthday[1][0])
-       ordinal_suffix = {1: 'st', 2: 'nd', 3: 'rd', 11: 'th', 12: 'th', 13: 'th'}.get(age % 10 if not 10 < age <= 13 else age % 14, 'th')
-       print(f" It's {birthday[0]}'s {age}{ordinal_suffix} Birthday")
+if __name__ == "__main__":
+   main()
 
