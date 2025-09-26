@@ -1,12 +1,16 @@
-from colorama import init
-init()
-from colorama import Fore , Back , Style # Fore- font color | Back- Background
+from colorama import init, Fore, Back, Style
 
-print(Fore.GREEN,"hello qxresearcher")
 
-print(Back.RED,"hello qxresearcher")
+def main():
+	init()
+	print(Fore.GREEN, "hello qxresearcher")
+	print(Back.RED, "hello qxresearcher")
 
-#to get back to boring B&W: print(Styoe.RESET_ALL)
+	# to get back to boring B&W: print(Style.RESET_ALL)
+
+
+if __name__ == '__main__':
+	main()
 
 ```
 All Variaton on Colors: 
