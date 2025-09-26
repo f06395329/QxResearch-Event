@@ -1,13 +1,17 @@
 import pyfiglet
 
 
-def main():
-  word = pyfiglet.figlet_format("qxresearch", font="alphabet")
-  print(word)
+def main(text: str = "qxresearch", font: str = "alphabet") -> None:
+    """Render `text` using pyfiglet with `font` (default: 'alphabet').
+
+    This keeps the script import-safe and allows callers to reuse `main`.
+    """
+    word = pyfiglet.figlet_format(text, font=font)
+    print(word)
 
 
-if __name__ == '__main__':
-  main()
+if __name__ == "__main__":
+    main()
 
 ```
 Output:
