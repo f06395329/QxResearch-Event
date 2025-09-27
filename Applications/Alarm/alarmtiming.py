@@ -5,9 +5,9 @@ import winsound
 
 def main():
     # input the time in HH:MM where HH is hour and MM is minutes in 12 hour format
-    alarm_date = input('Enter the date on which you want to set the alarm: ').strip()
+    alarm_date = input('Enter the date on which you want to set the alarm (DD): ').strip().zfill(2)
     alarm_time = ''.join(input("Enter the time of alarm to be set in HH:MM,AM/PM format: ").split())
-    music_or_beep = input("Enter m for a music or b for beep sound: ")
+    music_or_beep = input("Enter m for a music or b for beep sound: ").strip().lower()
     if music_or_beep == 'b':
         dur = int(input("duration in seconds: ")) * 1000  # winsound takes in milliseconds
         freq = int(input("frequency of the noise: "))  # optimal- 500
@@ -36,9 +36,22 @@ def main():
             print('| ' + 'Wake up!' + ' |')
             print('*' * 10)
             if music_or_beep == 'm':
-                playsound('audio.wav')
+                try:
+                    playsound('audio.wav')
+                except Exception as exc:
+                    print('Failed to play audio.wav:', exc)
             else:
-                winsound.Beep(freq, dur)
+                try:
+                    winsound.Beep(freq, dur)
+                except Exception as exc:
+                    print('Failed to beep:', exc)
+            break
+        # avoid tight busy-waiting
+        try:
+            from time import sleep
+            sleep(1)
+        except KeyboardInterrupt:
+            print('Alarm cancelled by user')
             break
 
 
