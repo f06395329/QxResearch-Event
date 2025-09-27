@@ -1,16 +1,15 @@
 from colorama import init, Fore, Back, Style
 
 
-def main():
-	init()
-	print(Fore.GREEN, "hello qxresearcher")
-	print(Back.RED, "hello qxresearcher")
+def main(message: str = "hello qxresearcher") -> None:
+    """Print `message` in a couple of terminal colors (demo helper)."""
+    init()
+    print(Fore.GREEN, message)
+    print(Back.RED, message)
 
-	# to get back to boring B&W: print(Style.RESET_ALL)
 
-
-if __name__ == '__main__':
-	main()
+if __name__ == "__main__":
+    main()
 
 ```
 All Variaton on Colors: 
