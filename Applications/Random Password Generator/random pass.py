@@ -2,26 +2,33 @@ from tkinter import *
 import random
 import string
 
-root = Tk()
-root.geometry("400x200")
 
-passstr = StringVar()
-pwd_len = IntVar()
+def main() -> None:
+    """Run the simple Tk password generator GUI."""
+    root = Tk()
+    root.geometry("400x200")
 
-# function to generate the password
-def get_pass():
-    pass1 = string.ascii_letters + string.digits + string.punctuation
-    password = ""
+    passstr = StringVar()
+    pwd_len = IntVar()
 
-    for x in range(pwd_len.get()): #loop to generate the user given length for password
-        password = password + random.choice(pass1)
-    passstr.set(password)
+    # function to generate the password
+    def get_pass():
+        pass1 = string.ascii_letters + string.digits + string.punctuation
+        password = ""
 
-#tkinter command to generate the gui    
-Label(root, text="Password Generator", font="calibri 18 bold").pack()
-Label(root, text="Enter length of Password").pack(pady=9)
-Entry(root, textvariable=pwd_len).pack(pady=2)
-Button(root, text="Generate Password", command=generate).pack(pady=15)
-Entry(root, textvariable=passstr).pack(pady=2)
+        for x in range(pwd_len.get()):  # loop to generate the user given length for password
+            password = password + random.choice(pass1)
+        passstr.set(password)
 
-root.mainloop()
+    # tkinter command to generate the gui
+    Label(root, text="Password Generator", font="calibri 18 bold").pack()
+    Label(root, text="Enter length of Password").pack(pady=9)
+    Entry(root, textvariable=pwd_len).pack(pady=2)
+    Button(root, text="Generate Password", command=get_pass).pack(pady=15)
+    Entry(root, textvariable=passstr).pack(pady=2)
+
+    root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
