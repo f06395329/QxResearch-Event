@@ -23,7 +23,7 @@ def take_screenshot(save_dir: str | Path | None = None) -> Path:
     return out
 
 
-def main():
+def main(save_prefix: str | None = None):
     win = tk.Tk()
     win.title("LoopGlitch Screenshoter")
 
