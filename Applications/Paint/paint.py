@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter.colorchooser import askcolor
 
 class Paint(object):
+    """Simple Tkinter paint/brush GUI app."""
     pen_size = 5.0
     color = 'black'
 
@@ -69,5 +70,5 @@ class Paint(object):
     def reset(self, event):
         self.old_x, self.old_y = None, None
 
-if __name__ =='__main__':
-        Paint()
+if __name__ == '__main__':
+    Paint()
