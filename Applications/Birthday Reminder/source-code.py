@@ -1,3 +1,9 @@
+"""Tiny birthday reminder utility.
+
+This module provides a small interactive `main()` function that can be used to
+check and append birthdays. It's intentionally lightweight and safe to import.
+"""
+
 import datetime
 from typing import List, Tuple
 
@@ -10,10 +16,10 @@ def _ordinal_suffix(n: int) -> str:
 
 
 def main() -> None:
-   """Run a tiny birthday checker. Prompts to add a birthday and prints today's matches.
+   """Run a tiny birthday checker.
 
-   This function is safe to import (doesn't run until called) and uses simple ISO date parsing
-   for the add flow (yyyy-mm-dd).
+   Prompts to add a birthday and prints today's matches. Uses ISO date parsing
+   for the add flow (yyyy-mm-dd). Safe to import; call `main()` to run.
    """
    today = datetime.date.today()
    bday_log: List[Tuple[str, Tuple[str, str, str]]] = [
