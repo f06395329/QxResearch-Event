@@ -1,3 +1,9 @@
+"""Simple link shortener and extractor helpers.
+
+Provides small CLI helpers to shorten a URL using tinyurl and to expand
+shortened URLs back to their original target.
+"""
+
 import pyshorteners
 from urllib.request import urlopen
 
@@ -19,6 +25,7 @@ def link_opener(link: str) -> None:
 
 
 def main() -> None:
+    """Interactive CLI: choose shorten or expand flow."""
     print("Enter your choice:")
     print(" 1. Shorten a link")
     print(" 2. Expand a shortened link to its real URL")
