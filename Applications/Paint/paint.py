@@ -70,5 +70,19 @@ class Paint(object):
     def reset(self, event):
         self.old_x, self.old_y = None, None
 
+    def run(self):
+        """Start the Tk main loop. Separated from __init__ so the class can be
+        imported without immediately starting the GUI (useful for tests or
+        programmatic reuse).
+        """
+        self.root.mainloop()
+
+
+def main():
+    """Create and run the Paint application."""
+    app = Paint()
+    app.run()
+
+
 if __name__ == '__main__':
-    Paint()
+    main()
